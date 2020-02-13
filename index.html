@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueJS Tutorials</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="vue-app">
+
+        <!-- ****************** Dynamic CSS classes  *************************************-->  
+        <h1>Dynamic CSS</h1>
+        <h2>Example 1</h2>
+        <div v-on:click="available = !available" v-bind:class="{available: available}">
+            <span>This is a span element</span>
+        </div>
+
+        <br>
+        <h2>Example 2</h2>
+        <div v-bind:class="computedClasses">
+            <button v-on:click="nearby = !nearby">Toggle nearby class</button>
+            <button v-on:click="available = !available">Toggle available class</button>
+            <span>This is a span element</span>
+        </div>
+
+        <!-- ****************** Using Conditionals to apply CSS classes  *************************************-->  
+        <h1>Conditionals</h1>
+        <button v-on:click="error = !error">Toggle error</button>
+        <button v-on:click="success = !success">Toggle success</button>
+        <p v-if="error">v-if error</p>
+        <p v-else-if="success" class="success">v-else-if success :)</p> 
+
+        <!-- below doesn't take the element out of the DOM, it just adds style="display: none;"" -->
+        <p v-show="error" class="error">v-show error</p>
+        <p v-show="success" class="success">v-show success :)</p>        
+
+
+        <!-- ****************** Looping through arrays  ********************************************************--> 
+        <h1>Looping through lists</h1>
+        <!-- loop through array of strings -->        
+        <ul>
+            <li v-for="character in characters">{{ character }}</li>
+        </ul>
+
+        <!-- loop through array of objects -->
+        <ul>
+            <li v-for="ninja in ninjas">{{ ninja.name }}, {{ ninja.age }}</li>
+        </ul>
+
+        
+        <!-- ****************** Access the array index too *************************************-->  
+        <!-- output the index for the array item too: -->
+        <ul>
+            <li v-for="(ninja,index) in ninjas">{{index}}. {{ ninja.name }} - {{ ninja.age }}</li>
+        </ul>    
+        
+        <!-- output in different tags (not just list items) - BUT gives div for every ninja... -->   
+        <div v-for="(ninja,index) in ninjas">
+            <h3>{{index}}. {{ ninja.name }}</h3> 
+            <p>{{ ninja.age }}</p>
+        </div>     
+        
+
+        <!-- ****************** template tags for cleaner markup *************************************-->  
+        <!-- use template tag to give cleaner markup (don't get divs like above)-->   
+        <template v-for="(ninja,index) in ninjas">
+                <h3>{{index}}. {{ ninja.name }}</h3> 
+                <p>{{ ninja.age }}</p>
+        </template>         
+
+        <!-- ****************** loop through array of UNKNOWN key value pairs *************************************-->  
+        <!-- loop through array of unknown key value pairs....output it all-->
+        <template v-for="ninja in ninjas">
+            <div v-for="(val,key) in ninja">
+                <p>{{ key }} - {{ val }}</p>
+            </div>
+        </template>              
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
